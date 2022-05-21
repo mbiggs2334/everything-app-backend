@@ -3,12 +3,14 @@ const app = express();
 
 const { NotFoundError} = require('./ExpressErrors');
 const cors = require('cors');
+const {setHeader} = require("./middleware/cors");
 const {authenticateJWT} = require('./middleware/auth');
 
 app.use(express.json());
 
 app.use(cors());
 app.use(authenticateJWT);
+app.use(setHeader);
 
 const authRoutes = require('./routes/auth');
 const userRoutes = require('./routes/users');
